@@ -35,6 +35,7 @@ class Response implements ApnsResponseInterface
      * @var array
      */
     private static $reasonPhrases = [
+        0 => 'Unknown ...',
         200 => 'Success.',
         400 => 'Bad request.',
         403 => 'There was an error with the certificate or with the provider authentication token.',
@@ -52,6 +53,9 @@ class Response implements ApnsResponseInterface
      * @var array
      */
     private static $errorReasons = [
+        0 => [
+            'Unknown' => '???'
+        ],
         400 => [
             'BadCollapseId' => 'The collapse identifier exceeds the maximum allowed size',
             'BadDeviceToken' => 'The specified device token was bad.' .

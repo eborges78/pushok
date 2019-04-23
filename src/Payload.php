@@ -146,7 +146,7 @@ class Payload implements \JsonSerializable
         if (\is_array($aps)) {
             $this->aps = $aps;
         } else {
-            $this->aps = \json_encode($aps);
+            $this->aps = \json_decode($aps, true);
         }
 
         return $this;
