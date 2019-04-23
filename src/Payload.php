@@ -91,6 +91,13 @@ class Payload implements \JsonSerializable
      */
     private $customValues;
 
+    /**
+     * Full Payload
+     *
+     * @var array
+     */
+    private $aps = [];
+
     protected function __construct()
     {
     }
@@ -127,6 +134,32 @@ class Payload implements \JsonSerializable
     {
         return $this->alert;
     }
+
+    /**
+     * Set Full payload
+     *
+     * @param $aps
+     * @return Payload
+     */
+    public function setAps($aps): Payload
+    {
+        if (\is_array($aps)) {
+            $this->aps = $aps;
+        } else {
+            $this->aps = \json_encode($aps);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAps(): array
+    {
+        return $this->aps;
+    }
+
 
     /**
      * Set badge.
@@ -320,6 +353,10 @@ class Payload implements \JsonSerializable
      */
     public function jsonSerialize()
     {
+        if (!empty($this->aps)) {
+            return $this->aps;
+        }
+
         $payload = self::getDefaultPayloadStructure();
 
         if ($this->alert instanceof Alert || is_string($this->alert)) {
